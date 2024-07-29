@@ -2,7 +2,7 @@
 
 ### Overview
 
-The Expense Sharing Application is designed to manage user-related and expense-related data. It allows users to add expenses and split them among different people based on three different methods: exact amounts, percentages, and equal splits. The application manages user details, validates inputs.
+The Expense Sharing Application is designed to manage user-related and expense-related data. It allows users to add expenses and split them among different people based on three different methods: exact amounts, percentages, and equal splits. The application manages user details and validates inputs.
 
 ## Architecture
 
@@ -34,14 +34,18 @@ The application consists of an API Gateway for request routing, backend services
 ## API Endpoints
 
 ### User Endpoints (/users)
-- **Create user:** `/new-user`
-- **Retrieve user details:** `/{id}`
-- **Retrieve all users:** `/all-users`
+- **Create user:**(POST) `/new-user`
+- **Retrieve user details:**(GET) `/{id}`
+- **Retrieve all users:**(GET) `/all-users`
 
 ### Expense Endpoints (/expenses)
-- **Add expense:** `/new-expense`
-- **Retrieve individual user expenses:** `/user-expense/{userId}`
-- **Retrieve overall expenses:** `/all`
+- **Add expense:**(POST) `/new-expense`
+- **Retrieve individual user expenses:**(GET) `/user-expense/{userId}`
+- **Retrieve overall expenses:**(GET) `/all`
+- **Process expense:**(POST) `/process/{expenseId}`
+- **Split Equally:** (POST) `/split-equally/{expenseId}`
+- **Split By Exact Amount:** (POST) `/split-exact/{expenseId}`
+- **Split By Percentage:** (POST) `/split-percentage/{expenseId}`
 
 ## Data Validation
 - Validate user inputs.
