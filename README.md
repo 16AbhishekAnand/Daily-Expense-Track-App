@@ -1,5 +1,3 @@
-This README file provides a clear overview of the Expense Sharing Application, its functional requirements, API endpoints, data validation, and setup instructions. Here is the refined version:
-
 ## Daily Expense Track App
 
 ### Overview
