@@ -48,7 +48,9 @@ public class ExpenseController {
     @PostMapping("/process/{expenseId}")
     public ResponseEntity<Void> processExpense(@PathVariable Long expenseId, @RequestBody Map<String, Object> expenseTypes) {
         // Ensure expenseTypes is structured correctly before passing
+        System.out.println("Process started");
         expenseService.processExpense(expenseId, expenseTypes);
+        System.out.println("Process success");
         return new ResponseEntity<>(HttpStatus.OK);
     }
 

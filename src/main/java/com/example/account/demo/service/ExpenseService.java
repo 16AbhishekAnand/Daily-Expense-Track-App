@@ -9,6 +9,8 @@ import com.example.account.demo.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -45,6 +47,7 @@ public class ExpenseService {
 
 
     public void processExpense(Long expenseId, Map<String, Object> expenseTypes) {
+        System.out.println("ProcessExpense started");
         Expense expense = expenseRepository.findById(expenseId)
                 .orElseThrow(() -> new RuntimeException("Expense not found"));
 
@@ -54,13 +57,31 @@ public class ExpenseService {
 
             switch (type) {
                 case "equal":
-                    splitExpenseEqually(expense, (List<Long>) value);
+                    List<Integer> equalIds = (List<Integer>)value;
+                    List<Long> equalLongIds = new ArrayList<>();
+                    for(Integer id:equalIds) {
+                        equalLongIds.add(id.longValue());
+                    }
+                    splitExpenseEqually(expense, equalLongIds);
+                    System.out.println("ProcessExpense success");
                     break;
                 case "exact":
-                    splitExpenseByExactAmounts(expense, (Map<Long, Double>) value);
+                    Map<String, Double> exactMap = (Map<String, Double>) value;
+                    Map<Long, Double> exactLongMap = new HashMap<>();
+                    for (Map.Entry<String, Double> exactEntry : exactMap.entrySet()) {
+                        exactLongMap.put(Long.valueOf(exactEntry.getKey()), exactEntry.getValue());
+                    }
+                    splitExpenseByExactAmounts(expense, exactLongMap);
+                    System.out.println("ProcessExpense success");
                     break;
                 case "percent":
-                    splitExpenseByPercentage(expense, (Map<Long, Double>) value);
+                    Map<String, Double> percentMap = (Map<String, Double>) value;
+                    Map<Long, Double> percentLongMap = new HashMap<>();
+                    for (Map.Entry<String, Double> percentEntry : percentMap.entrySet()) {
+                        percentLongMap.put(Long.valueOf(percentEntry.getKey()), percentEntry.getValue());
+                    }
+                    splitExpenseByPercentage(expense, percentLongMap);
+                    System.out.println("ProcessExpense success");
                     break;
                 default:
                     throw new IllegalArgumentException("Unknown expense type: " + type);
