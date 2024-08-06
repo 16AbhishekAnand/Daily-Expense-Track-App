@@ -47,7 +47,6 @@ public class ExpenseService {
 
 
     public void processExpense(Long expenseId, Map<String, Object> expenseTypes) {
-        System.out.println("ProcessExpense started");
         Expense expense = expenseRepository.findById(expenseId)
                 .orElseThrow(() -> new RuntimeException("Expense not found"));
 
@@ -63,7 +62,6 @@ public class ExpenseService {
                         equalLongIds.add(id.longValue());
                     }
                     splitExpenseEqually(expense, equalLongIds);
-                    System.out.println("ProcessExpense success");
                     break;
                 case "exact":
                     Map<String, Double> exactMap = (Map<String, Double>) value;
@@ -72,7 +70,7 @@ public class ExpenseService {
                         exactLongMap.put(Long.valueOf(exactEntry.getKey()), exactEntry.getValue());
                     }
                     splitExpenseByExactAmounts(expense, exactLongMap);
-                    System.out.println("ProcessExpense success");
+
                     break;
                 case "percent":
                     Map<String, Double> percentMap = (Map<String, Double>) value;
@@ -81,8 +79,8 @@ public class ExpenseService {
                         percentLongMap.put(Long.valueOf(percentEntry.getKey()), percentEntry.getValue());
                     }
                     splitExpenseByPercentage(expense, percentLongMap);
-                    System.out.println("ProcessExpense success");
                     break;
+
                 default:
                     throw new IllegalArgumentException("Unknown expense type: " + type);
             }

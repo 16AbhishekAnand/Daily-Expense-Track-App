@@ -2,7 +2,6 @@ package com.example.account.demo.controller;
 
 import com.example.account.demo.model.Expense;
 import com.example.account.demo.model.ExpenseDetail;
-import com.example.account.demo.model.Users;
 import com.example.account.demo.service.ExpenseService;
 import com.example.account.demo.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,9 +47,7 @@ public class ExpenseController {
     @PostMapping("/process/{expenseId}")
     public ResponseEntity<Void> processExpense(@PathVariable Long expenseId, @RequestBody Map<String, Object> expenseTypes) {
         // Ensure expenseTypes is structured correctly before passing
-        System.out.println("Process started");
         expenseService.processExpense(expenseId, expenseTypes);
-        System.out.println("Process success");
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
