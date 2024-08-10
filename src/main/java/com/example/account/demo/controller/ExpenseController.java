@@ -51,6 +51,7 @@ public class ExpenseController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
+    // Below endPoints are optional.
     // Split expense equally
     @PostMapping("/split-equally/{expenseId}")
     public ResponseEntity<Void> splitExpenseEqually(@PathVariable Long expenseId, @RequestBody List<Long> userIds) {

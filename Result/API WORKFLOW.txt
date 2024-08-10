@@ -1,0 +1,60 @@
+API WORKFLOW
+
+1. Creating a New User
+Endpoint: POST /users/new-user
+JSON Payload:
+
+{
+  "email": "user@example.com",
+  "name": "John Doe",
+  "mobileNumber": "1234567890"
+}
+
+2. Creating a New Expense
+Endpoint: POST /expenses/new-expense
+JSON Payload:
+
+{
+  "amount": 1000,
+  "date": "2024-08-11",
+  "expenseType": "equal"
+}
+
+3. Processing Expense Splitting
+Endpoint: POST /expenses/process/{expenseId}
+
+Conditions: Based on the type of expense splitting (equal, exact, percent).
+
+a. If the type is equal
+JSON Payload:
+
+{
+  "equal": ["uid1", "uid2", "uid3"]
+}
+
+b. If the type is exact
+Condition: num1 + num2 + ... + numN = amount
+JSON Payload:
+
+{
+  "exact": {
+    "uid1": 300,
+    "uid2": 400,
+    "uid3": 300
+  }
+}
+
+c. If the type is percent
+Condition: x + y + z = 100 (Total percentage must equal 100)
+JSON Payload:
+
+{
+  "percent": {
+    "uid1": 30,
+    "uid2": 40,
+    "uid3": 30
+  }
+}
+
+4. Downloading Excel-Sheet
+Endpoint: GET  /download/excel-sheet
